@@ -3,23 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Jose Reis — projects, paper, certifications." />
+  <meta name="description" content="Jose Reis — papers, projects, experience, credentials." />
   <title>Jose Reis</title>
 
   <style>
     :root{
       --bg:#ffffff;
-      --text:#0f1115;
-      --muted:#5b616a;
-      --line:#e7e9ee;
-      --chip:#f4f6fa;
+      --text:#0e1015;
+      --muted:#58606b;
+      --line: rgba(16,18,24,.10);
+      --chip: rgba(16,18,24,.04);
+
       --accent:#2f6fed;
       --accent2:#17b890;
-      --max: 920px;
-      --radius: 18px;
-      --shadow: 0 14px 50px rgba(16,17,20,.07);
-      --shadow2: 0 8px 26px rgba(16,17,20,.08);
-      --ease: cubic-bezier(.2,.8,.2,1);
+
+      --max: 940px;
+      --r: 18px;
+
+      --shadow: 0 18px 60px rgba(16,17,20,.08);
+      --shadow2: 0 10px 28px rgba(16,17,20,.08);
+
+      --ease: cubic-bezier(.2,.85,.2,1);
+      --ease2: cubic-bezier(.16,1,.3,1);
+
+      --t-fast: 140ms;
+      --t: 220ms;
+      --t-slow: 420ms;
     }
 
     *{ box-sizing:border-box; }
@@ -30,25 +39,35 @@
       color: var(--text);
       line-height: 1.6;
       background:
-        radial-gradient(900px 420px at 12% 0%, rgba(47,111,237,.12), transparent 60%),
-        radial-gradient(980px 420px at 92% 12%, rgba(23,184,144,.12), transparent 60%),
+        radial-gradient(960px 440px at 10% 0%, rgba(47,111,237,.12), transparent 60%),
+        radial-gradient(980px 440px at 92% 12%, rgba(23,184,144,.12), transparent 60%),
         radial-gradient(1100px 520px at 55% 100%, rgba(47,111,237,.06), transparent 55%),
         var(--bg);
     }
 
-    a{ color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+    a{ color: inherit; text-decoration: none; }
     a:hover{ text-decoration: underline; text-underline-offset: 4px; }
 
-    .wrap{ max-width: var(--max); margin:0 auto; padding: 26px 18px 74px; }
+    /* Layout */
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 26px 18px 76px; }
+
+    /* Subtle page entrance (no JS) */
+    .page{
+      animation: pageIn var(--t-slow) var(--ease2) both;
+    }
+    @keyframes pageIn{
+      from{ opacity: 0; transform: translateY(8px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
 
     /* Top nav */
     .nav{
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.78);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(231,233,238,.75);
+      border-bottom: 1px solid var(--line);
     }
     .nav .wrap{
       padding: 12px 18px;
@@ -62,22 +81,22 @@
       display:flex;
       align-items:center;
       gap: 10px;
-      min-width: 210px;
+      min-width: 230px;
     }
     .mark{
       width: 14px; height: 14px;
       border-radius: 999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow:
-        0 0 0 6px rgba(47,111,237,.10),
-        0 0 0 14px rgba(23,184,144,.05);
+        0 0 0 7px rgba(47,111,237,.10),
+        0 0 0 16px rgba(23,184,144,.05);
     }
     .brand strong{ font-size: 14px; letter-spacing:.2px; }
     .brand .sub{ display:block; font-size: 12px; color: var(--muted); margin-top: 1px; }
 
     .links{
       display:flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content:flex-end;
     }
@@ -86,7 +105,7 @@
       color: var(--muted);
       padding: 7px 10px;
       border-radius: 999px;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+      transition: background var(--t) var(--ease), color var(--t) var(--ease), transform var(--t) var(--ease);
     }
     .links a:hover{
       background: var(--chip);
@@ -96,29 +115,26 @@
     }
 
     /* Hero */
-    .hero{
-      padding-top: 28px;
-      position: relative;
-    }
+    .hero{ padding-top: 30px; }
     h1{
       margin: 0 0 10px;
-      font-size: clamp(32px, 4.4vw, 52px);
+      font-size: clamp(30px, 4.2vw, 52px);
       letter-spacing: -0.9px;
-      line-height: 1.05;
+      line-height: 1.04;
     }
     .lead{
       margin: 0 0 18px;
       color: var(--muted);
       font-size: 15px;
-      max-width: 70ch;
+      max-width: 74ch;
     }
 
     .heroCard{
       margin-top: 18px;
-      border: 1px solid rgba(231,233,238,.9);
-      border-radius: calc(var(--radius) + 4px);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--r) + 6px);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.78));
+        linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.78));
       box-shadow: var(--shadow);
       overflow: hidden;
     }
@@ -128,27 +144,34 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 14px;
-      border-bottom: 1px solid rgba(231,233,238,.75);
+      border-bottom: 1px solid var(--line);
     }
     .heroRow:last-child{ border-bottom: 0; }
+
     .heroMeta{
       display:flex;
       flex-wrap: wrap;
       gap: 8px;
       align-items:center;
     }
+
     .pill{
       font-size: 12px;
       color: var(--muted);
-      border: 1px solid rgba(231,233,238,.9);
-      background: rgba(244,246,250,.85);
+      border: 1px solid var(--line);
+      background: rgba(16,18,24,.03);
       padding: 6px 10px;
       border-radius: 999px;
       display:inline-flex;
       gap: 8px;
       align-items:center;
       white-space: nowrap;
-      transition: background .2s var(--ease), border-color .2s var(--ease);
+      transition: transform var(--t) var(--ease), background var(--t) var(--ease), border-color var(--t) var(--ease);
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(47,111,237,.06);
+      border-color: rgba(47,111,237,.18);
     }
     .pill i{
       width: 8px; height: 8px;
@@ -157,6 +180,7 @@
       background: rgba(47,111,237,.65);
       box-shadow: 0 0 0 4px rgba(47,111,237,.10);
     }
+
     .cta{
       display:flex;
       gap: 10px;
@@ -169,11 +193,16 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(231,233,238,.95);
-      background: #fff;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
       font-size: 13px;
-      box-shadow: 0 10px 28px rgba(16,17,20,.06);
-      transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+      box-shadow: 0 12px 28px rgba(16,17,20,.07);
+      transition:
+        transform var(--t) var(--ease),
+        box-shadow var(--t) var(--ease),
+        border-color var(--t) var(--ease),
+        background var(--t) var(--ease);
+      will-change: transform;
     }
     .btn:hover{
       transform: translateY(-2px);
@@ -181,42 +210,44 @@
       border-color: rgba(47,111,237,.22);
       text-decoration:none;
     }
-    .btn:active{
-      transform: translateY(0);
-    }
     .btn.primary{
       border-color: rgba(47,111,237,.25);
       background: linear-gradient(180deg, rgba(47,111,237,.12), rgba(47,111,237,.06));
     }
 
+    .miniPill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: rgba(16,18,24,.03);
+      padding: 4px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
     /* Sections */
-    section{ padding-top: 34px; }
+    section{ padding-top: 36px; }
     .secTitle{
       display:flex;
       align-items:baseline;
       justify-content:space-between;
       gap: 12px;
-      margin: 0 0 10px;
+      margin: 0 0 12px;
     }
     h2{
       margin: 0;
-      font-size: 16px;
-      letter-spacing: .35px;
+      font-size: 15px;
+      letter-spacing: .45px;
       text-transform: uppercase;
       color: var(--muted);
-      font-weight: 700;
     }
-    .note{
-      margin: 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .note{ margin: 0; font-size: 13px; color: var(--muted); }
 
     /* Surface */
     .surface{
-      border: 1px solid rgba(231,233,238,.9);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.84);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.82);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
@@ -228,25 +259,16 @@
       gap: 14px;
       padding: 14px;
       align-items: start;
-      border-top: 1px solid rgba(231,233,238,.75);
-      transition: background .2s var(--ease);
+      border-top: 1px solid var(--line);
     }
     .feature:first-child{ border-top: 0; }
     .feature h3{
       margin: 0 0 6px;
       font-size: 15px;
       letter-spacing: -0.2px;
-      font-weight: 600;
     }
-    .feature p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .feature .links{
-      gap: 8px;
-      justify-content:flex-start;
-    }
+    .feature p{ margin: 0; color: var(--muted); font-size: 13px; }
+
     .tagRow{
       margin-top: 10px;
       display:flex;
@@ -256,15 +278,21 @@
     .tag{
       font-size: 12px;
       color: var(--muted);
-      border: 1px solid rgba(231,233,238,.9);
-      background: rgba(244,246,250,.75);
+      border: 1px solid var(--line);
+      background: rgba(16,18,24,.03);
       padding: 5px 9px;
       border-radius: 999px;
+      transition: transform var(--t) var(--ease), background var(--t) var(--ease), border-color var(--t) var(--ease);
+    }
+    .tag:hover{
+      transform: translateY(-1px);
+      background: rgba(23,184,144,.06);
+      border-color: rgba(23,184,144,.18);
     }
 
-    /* Accordion with motion */
+    /* Accordion: smooth motion + consistent spacing */
     details{
-      border-top: 1px solid rgba(231,233,238,.75);
+      border-top: 1px solid var(--line);
       padding: 0;
       background: transparent;
     }
@@ -278,14 +306,12 @@
       justify-content:space-between;
       gap: 14px;
       padding: 14px;
-      font-weight: 600;
+      font-weight: 720;
       user-select:none;
-      transition: background .2s var(--ease), color .2s var(--ease);
-    }
-    summary:hover{
-      background: rgba(47,111,237,.04);
+      transition: background var(--t) var(--ease);
     }
     summary::-webkit-details-marker{ display:none; }
+    summary:hover{ background: rgba(16,18,24,.02); }
 
     .sumLeft{
       display:flex;
@@ -297,7 +323,6 @@
       font-size: 15px;
       letter-spacing: -0.2px;
       line-height: 1.25;
-      font-weight: 600;
     }
     .sumMeta{
       font-size: 12px;
@@ -307,45 +332,33 @@
       flex-wrap: wrap;
       align-items:center;
     }
-    .miniPill{
-      font-size: 12px;
-      color: var(--muted);
-      border: 1px solid rgba(231,233,238,.9);
-      background: rgba(244,246,250,.70);
-      padding: 4px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
-      transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
-    }
 
     .chev{
       width: 34px; height: 34px;
       border-radius: 999px;
-      border: 1px solid rgba(231,233,238,.95);
+      border: 1px solid var(--line);
       background: rgba(255,255,255,.9);
       display:grid;
       place-items:center;
       flex: 0 0 auto;
-      transition: transform .3s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+      transition: transform var(--t) var(--ease), background var(--t) var(--ease), border-color var(--t) var(--ease);
     }
-    .chev svg{ width: 18px; height: 18px; opacity: .7; transition: opacity .2s var(--ease); }
+    .chev svg{ width: 18px; height: 18px; opacity: .75; }
     details[open] .chev{
       transform: rotate(180deg);
       background: rgba(47,111,237,.08);
       border-color: rgba(47,111,237,.22);
     }
-    details[open] .chev svg{
-      opacity: 1;
-    }
 
-    /* Animated body using grid rows */
+    /* Smooth content reveal (grid rows) + gentle fade/slide */
     .body{
       display:grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows .4s var(--ease);
+      transition: grid-template-rows var(--t-slow) var(--ease2);
       padding: 0 14px;
     }
     details[open] .body{ grid-template-rows: 1fr; }
+
     .body > .inner{
       overflow: hidden;
       padding-bottom: 14px;
@@ -353,21 +366,38 @@
       font-size: 13px;
     }
 
-    .inner .row{
+    /* This creates the "motion" feel inside the reveal */
+    .inner > .content{
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity var(--t-slow) var(--ease2), transform var(--t-slow) var(--ease2);
+      will-change: transform, opacity;
+      padding-top: 8px;
+    }
+    details[open] .inner > .content{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .row{
       margin-top: 10px;
       display:flex;
       gap: 10px;
       flex-wrap: wrap;
       align-items:center;
     }
-    .inner a{
+    .row a{
       color: var(--text);
-      border-bottom: 1px solid rgba(47,111,237,.2);
+      border-bottom: 1px solid rgba(16,17,20,.18);
       text-decoration:none;
-      transition: border-color .2s var(--ease), color .2s var(--ease);
+      transition: border-color var(--t) var(--ease), transform var(--t) var(--ease);
     }
-    .inner a:hover{ border-bottom-color: var(--accent); color: var(--accent); }
+    .row a:hover{
+      border-bottom-color: var(--accent);
+      transform: translateY(-1px);
+    }
 
+    /* Credentials list */
     .credGrid{
       display:grid;
       grid-template-columns: 1fr;
@@ -376,26 +406,24 @@
     }
     .credItem{
       display:flex;
-      gap: 10px;
+      gap: 12px;
       align-items:flex-start;
       justify-content:space-between;
-      padding: 10px 12px;
-      border: 1px solid rgba(231,233,238,.9);
+      padding: 11px 12px;
+      border: 1px solid var(--line);
       border-radius: 14px;
-      background: rgba(244,246,250,.55);
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+      background: rgba(16,18,24,.02);
+      transition: transform var(--t) var(--ease), background var(--t) var(--ease), border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
     }
     .credItem:hover{
       transform: translateY(-2px);
-      background: rgba(244,246,250,.8);
-      border-color: rgba(47,111,237,.22);
-      box-shadow: 0 4px 12px rgba(47,111,237,.08);
+      background: rgba(47,111,237,.05);
+      border-color: rgba(47,111,237,.18);
+      box-shadow: 0 10px 24px rgba(16,17,20,.06);
     }
-    .credLeft{
-      min-width:0;
-    }
+    .credLeft{ min-width:0; }
     .credName{
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text);
       font-size: 13px;
       line-height: 1.3;
@@ -417,21 +445,22 @@
       flex-wrap: wrap;
       align-items:center;
       justify-content:space-between;
-      border-top: 1px solid rgba(231,233,238,.75);
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
     }
     .contact .left{
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .contact .right{
       display:flex; gap: 10px; flex-wrap: wrap;
     }
 
     footer{
-      margin-top: 44px;
+      margin-top: 46px;
       padding-top: 18px;
-      border-top: 1px solid rgba(231,233,238,.9);
+      border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
       display:flex;
@@ -440,23 +469,28 @@
       flex-wrap: wrap;
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 720px){
+    /* Responsive */
+    @media (max-width: 760px){
       .heroRow{ flex-direction: column; align-items: flex-start; }
       .cta{ justify-content:flex-start; }
       .feature{ grid-template-columns: 1fr; }
+      .brand{ min-width: auto; }
     }
     @media (max-width: 520px){
       .nav .wrap{ padding: 10px 14px; }
-      .wrap{ padding: 22px 14px 60px; }
+      .wrap{ padding: 22px 14px 62px; }
+      .links{ gap: 6px; }
       .links a{ padding: 6px 8px; }
       .chev{ width: 32px; height: 32px; }
     }
 
-    /* Respect reduced motion */
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior: auto; }
-      .btn, .links a, .credItem, .chev, .body, summary, .inner a, a, .pill, .miniPill{ transition: none !important; }
+      .page{ animation: none; }
+      .btn, .links a, .credItem, .chev, .body, .inner > .content, .pill, .tag, .row a, summary{
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -468,13 +502,14 @@
         <span class="mark" aria-hidden="true"></span>
         <div>
           <strong>Jose Reis</strong>
-          <span class="sub">Data Analysis and AI • VU Amsterdam</span>
+          <span class="sub">AI / ML • VU Amsterdam</span>
         </div>
       </div>
+
       <nav class="links" aria-label="Primary">
         <a href="#highlights">Highlights</a>
-        <a href="#paper">Papers</a>
-        <a href="#project">Project</a>
+        <a href="#papers">Papers</a>
+        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#credentials">Credentials</a>
         <a href="#contact">Contact</a>
@@ -482,13 +517,13 @@
     </div>
   </div>
 
-  <main id="top" class="wrap">
+  <main id="top" class="wrap page">
+    <!-- HERO -->
     <header class="hero">
-      <h1>
-        Jose Maria Zuzarte Reis Claver
-      </h1>
+      <h1>Jose Maria Zuzarte Reis Claver</h1>
       <p class="lead">
-        I’m a Portuguese 3rd year Artificial Intelligent at VU Amsterdam, with foundations in machine learning, statistics and data analysis, with experience as a teaching and research assistant, and interested in applied AI and data analysis. I’m highly motivated to experience new challenges and collecting more hands-on experience while facing a new environment.
+        Portuguese 3rd year Artificial Intelligence student at VU Amsterdam, with foundations in machine learning, statistics and data analysis.
+        Experience as teaching and research assistant; interested in applied AI and data analysis.
       </p>
 
       <div class="heroCard" id="highlights">
@@ -516,10 +551,10 @@
       </div>
     </header>
 
-    <!-- Paper -->
-    <section id="paper">
+    <!-- PAPERS -->
+    <section id="papers">
       <div class="secTitle">
-        <h2>Paper</h2>
+        <h2>Papers</h2>
         <p class="note">Accepted / to be published.</p>
       </div>
 
@@ -542,17 +577,26 @@
               </svg>
             </div>
           </summary>
+
           <div class="body">
             <div class="inner">
-              <div style="font-weight: 600; margin-bottom: 10px; font-size: 13px; color: var(--text);">Abstract</div>
-              Generative AI tools such as ChatGPT, GitHub Copilot, and Gemini have rapidly influenced programming education by providing instant code generation and problem-solving support. This study investigates the potential impact of these tools on an introductory Python programming course by conducting an observational analysis of two cohorts in 2022 and 2024. In total, we analyzed a corpus of 1,614 submissions across three assignments. To study the possible influence of generative AI tools, we created baseline solutions for each assignment using ChatGPT and Gemini.
-
-We then analyzed code similarity between the baseline solutions and the students’ submissions, as well as syntax errors across both cohorts. For Assignment 2, peer-to-peer duplication decreased by 60.11\% between 2022 and 2024. Among the 2024 submissions, we observe substantial similarity to fixed AI baselines, depending on task complexity. Although this pattern is consistent with the convergence toward AI-generated solutions, we lack direct measures of tool use and make no causal claims. The number of syntax errors did not differ significantly between the two cohorts. These findings suggest a shift in programming education, from direct student copying toward solutions that increasingly resemble AI-generated outputs. This shift emphasizes the need for updated assessments and policies to promote fairness, integrity, and meaningful learning in introductory programming courses.
-              <div class="row">
-                <span class="miniPill">Links</span>
-                <a href="#" target="_blank" rel="noreferrer" title="Add your preprint / camera-ready link">Preprint (soon)</a>
-                <span class="muted">·</span>
-                <a href="#" target="_blank" rel="noreferrer" title="Add DOI when available">DOI (soon)</a>
+              <div class="content">
+                <div style="font-weight: 700; margin-bottom: 10px; font-size: 13px; color: var(--text);">Abstract</div>
+                Generative AI tools such as ChatGPT, GitHub Copilot, and Gemini have rapidly influenced programming education by providing instant code generation and problem-solving support.
+                This study investigates the potential impact of these tools on an introductory Python programming course by conducting an observational analysis of two cohorts in 2022 and 2024.
+                We analyzed 1,614 submissions across three assignments and created baseline solutions using ChatGPT and Gemini.
+                We then measured code similarity between baselines and student submissions, and compared syntax errors across cohorts.
+                For Assignment 2, peer-to-peer duplication decreased by 60.11% between 2022 and 2024.
+                Among 2024 submissions, we observe substantial similarity to fixed AI baselines, depending on task complexity.
+                We make no causal claims due to lack of direct measures of tool use.
+                Syntax errors did not differ significantly between cohorts.
+                These findings suggest a shift from direct copying toward solutions that increasingly resemble AI-generated outputs, motivating updated assessments and integrity policies.
+                <div class="row">
+                  <span class="miniPill">Links</span>
+                  <a href="#" target="_blank" rel="noreferrer">Preprint (soon)</a>
+                  <span style="color: var(--muted);">·</span>
+                  <a href="#" target="_blank" rel="noreferrer">DOI (soon)</a>
+                </div>
               </div>
             </div>
           </div>
@@ -560,10 +604,40 @@ We then analyzed code similarity between the baseline solutions and the students
       </div>
     </section>
 
-    <!-- Experience -->
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="secTitle">
+        <h2>Projects</h2>
+        <p class="note">Selected personal work.</p>
+      </div>
+
+      <div class="surface">
+        <div class="feature">
+          <div>
+            <h3>Stock Management</h3>
+            <p>
+              Simulation of daily sales and inventory control for a supermarket setting. Includes a simple ordering policy,
+              KPIs (service level, stockouts, costs), and room for demand forecasting and a lightweight dashboard.
+            </p>
+            <div class="tagRow" aria-label="Tags">
+              <span class="tag">simulation</span>
+              <span class="tag">inventory</span>
+              <span class="tag">KPIs</span>
+              <span class="tag">forecasting (next)</span>
+            </div>
+          </div>
+          <div class="cta" style="justify-content:flex-start">
+            <a class="btn primary" href="https://github.com/josemzreis/stock_management" target="_blank" rel="noreferrer">Repo →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
     <section id="experience">
       <div class="secTitle">
         <h2>Experience</h2>
+        <p class="note">Roles and responsibilities.</p>
       </div>
 
       <div class="surface">
@@ -573,7 +647,7 @@ We then analyzed code similarity between the baseline solutions and the students
               <div class="sumTitle">Data Analyst Intern</div>
               <div class="sumMeta">
                 <span class="miniPill">Logizmic</span>
-                <span class="miniPill">Feb 2026 - Present</span>
+                <span class="miniPill">Feb 2026 – Present</span>
               </div>
             </div>
             <div class="chev" aria-hidden="true">
@@ -584,7 +658,7 @@ We then analyzed code similarity between the baseline solutions and the students
           </summary>
           <div class="body">
             <div class="inner">
-              Working as a Data Analyst Intern at Logizmic, focusing on data analysis and business intelligence projects.
+              
             </div>
           </div>
         </details>
@@ -595,7 +669,7 @@ We then analyzed code similarity between the baseline solutions and the students
               <div class="sumTitle">Research Assistant</div>
               <div class="sumMeta">
                 <span class="miniPill">Vrije Universiteit</span>
-                <span class="miniPill">Jan 2025 - Present</span>
+                <span class="miniPill">Jan 2025 – Present</span>
               </div>
             </div>
             <div class="chev" aria-hidden="true">
@@ -606,7 +680,9 @@ We then analyzed code similarity between the baseline solutions and the students
           </summary>
           <div class="body">
             <div class="inner">
-              Research Assistant at Vrije Universiteit, supporting research projects and data analysis work. Contributed to research initiatives with a focus on AI and programming education.
+              <div class="content">
+                Supported research projects through data handling, analysis, and reporting.
+              </div>
             </div>
           </div>
         </details>
@@ -617,7 +693,7 @@ We then analyzed code similarity between the baseline solutions and the students
               <div class="sumTitle">Teaching Assistant</div>
               <div class="sumMeta">
                 <span class="miniPill">Vrije Universiteit</span>
-                <span class="miniPill">Sep 2024 - Present</span>
+                <span class="miniPill">Sep 2024 – Present</span>
               </div>
             </div>
             <div class="chev" aria-hidden="true">
@@ -628,52 +704,29 @@ We then analyzed code similarity between the baseline solutions and the students
           </summary>
           <div class="body">
             <div class="inner">
-              Teaching Assistant for Introduction to Python Programming, Applied Programming, and Human-Computer Interaction.
-              <div class="row">
-                <span class="miniPill">Responsibilities</span>
+              <div class="content">
+                Teaching Assistant for Introduction to Python Programming, Applied Programming, and Human-Computer Interaction.
+                <div class="row">
+                  <span class="miniPill">Responsibilities</span>
+                </div>
+                <ul style="margin: 10px 0 0 0; padding-left: 20px; color: var(--muted); font-size: 13px;">
+                  <li style="margin-bottom: 6px;">Led weekly/bi-weekly lab sessions and tutorials</li>
+                  <li style="margin-bottom: 6px;">Mentored student teams on projects and design decisions while providing feedback</li>
+                  <li style="margin-bottom: 6px;">Graded assignments, projects, reports, and exams; conducted individual coding interviews</li>
+                  <li>Contributed to course improvements through staff meetings and feedback discussions</li>
+                </ul>
               </div>
-              <ul style="margin: 10px 0 0 0; padding-left: 20px; color: var(--muted); font-size: 13px;">
-                <li style="margin-bottom: 6px;">Led weekly/bi-weekly lab sessions and tutorials</li>
-                <li style="margin-bottom: 6px;">Mentored student teams on projects and design decisions while providing feedback</li>
-                <li style="margin-bottom: 6px;">Graded assignments, projects, reports, and exams and conducted individual coding interviews</li>
-                <li>Contributed to course improvement through staff meetings and feedback discussions</li>
-              </ul>
             </div>
           </div>
         </details>
       </div>
     </section>
 
-    <!-- Project -->
-    <section id="project">
-      <div class="secTitle">
-        <h2>Personal Projects</h2>
-      </div>
-
-      <div class="surface">
-        <div class="feature">
-          <div>
-            <h3>Stock Management</h3>
-            <p>
-              Personal project to simulate daily sales, manage inventory, and optimize orders in a supermarket setting. Includes a simple order policy, KPIs (service level, stockouts, costs), and later demand forecasting and an optional Streamlit app.
-            </p>
-            <div class="tagRow" aria-label="Tags">
-
-            </div>
-          </div>
-          <div class="cta" style="justify-content:flex-start">
-            <a class="btn primary" href="https://github.com/josemzreis/stock_management" target="_blank" rel="noreferrer">Repo →</a>
-           
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Credentials -->
+    <!-- CREDENTIALS -->
     <section id="credentials">
       <div class="secTitle">
         <h2>Credentials</h2>
-
+        <p class="note">Verified links included.</p>
       </div>
 
       <div class="surface">
@@ -693,47 +746,42 @@ We then analyzed code similarity between the baseline solutions and the students
               </svg>
             </div>
           </summary>
+
           <div class="body">
             <div class="inner">
-              <div class="credGrid" role="list">
-                <div class="credItem" role="listitem">
-                  <div class="credLeft">
-                    <div class="credName">IBM Exploratory Data Analysis for Machine Learning</div>
-                    <div class="credMeta">
-                      <span>Coursera</span><span>·</span><span>IBM</span>
+              <div class="content">
+                <div class="credGrid" role="list">
+                  <div class="credItem" role="listitem">
+                    <div class="credLeft">
+                      <div class="credName">IBM Exploratory Data Analysis for Machine Learning</div>
+                      <div class="credMeta"><span>Coursera</span><span>·</span><span>IBM</span></div>
                     </div>
+                    <a href="https://coursera.org/share/a82525ac6319fe767a78827e372b094d" target="_blank" rel="noreferrer" class="miniPill">Verify</a>
                   </div>
-                  <a href="https://coursera.org/share/a82525ac6319fe767a78827e372b094d" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
-                </div>
 
-                <div class="credItem" role="listitem">
-                  <div class="credLeft">
-                    <div class="credName">Microsoft Introduction to Microsoft Azure Cloud Services</div>
-                    <div class="credMeta">
-                      <span>Coursera</span><span>·</span><span>Microsoft</span>
+                  <div class="credItem" role="listitem">
+                    <div class="credLeft">
+                      <div class="credName">Microsoft Introduction to Microsoft Azure Cloud Services</div>
+                      <div class="credMeta"><span>Coursera</span><span>·</span><span>Microsoft</span></div>
                     </div>
+                    <a href="https://coursera.org/share/8e224e0fe602f6ee35213ec8635e31e2" target="_blank" rel="noreferrer" class="miniPill">Verify</a>
                   </div>
-                  <a href="https://coursera.org/share/8e224e0fe602f6ee35213ec8635e31e2" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
-                </div>
 
-                <div class="credItem" role="listitem">
-                  <div class="credLeft">
-                    <div class="credName">IBM Java Programming for Beginners</div>
-                    <div class="credMeta">
-                      <span>Coursera</span><span>·</span><span>IBM</span>
+                  <div class="credItem" role="listitem">
+                    <div class="credLeft">
+                      <div class="credName">IBM Java Programming for Beginners</div>
+                      <div class="credMeta"><span>Coursera</span><span>·</span><span>IBM</span></div>
                     </div>
+                    <a href="https://coursera.org/share/a253cd8afbe16f1e67dda695ada45475" target="_blank" rel="noreferrer" class="miniPill">Verify</a>
                   </div>
-                  <a href="https://coursera.org/share/a253cd8afbe16f1e67dda695ada45475" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
-                </div>
 
-                <div class="credItem" role="listitem">
-                  <div class="credLeft">
-                    <div class="credName">Meta Introduction to Front-End Development</div>
-                    <div class="credMeta">
-                      <span>Coursera</span><span>·</span><span>Meta</span>
+                  <div class="credItem" role="listitem">
+                    <div class="credLeft">
+                      <div class="credName">Meta Introduction to Front-End Development</div>
+                      <div class="credMeta"><span>Coursera</span><span>·</span><span>Meta</span></div>
                     </div>
+                    <a href="https://coursera.org/share/259f3a6719e09fc0608a646c9d7b5b79" target="_blank" rel="noreferrer" class="miniPill">Verify</a>
                   </div>
-                  <a href="https://coursera.org/share/259f3a6719e09fc0608a646c9d7b5b79" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
                 </div>
               </div>
             </div>
@@ -755,17 +803,18 @@ We then analyzed code similarity between the baseline solutions and the students
               </svg>
             </div>
           </summary>
+
           <div class="body">
             <div class="inner">
-              <div class="credGrid" role="list">
-                <div class="credItem" role="listitem">
-                  <div class="credLeft">
-                    <div class="credName">L1 Basic Proficiency in KNIME Analytics Platform</div>
-                    <div class="credMeta">
-                      <span>KNIME</span><span>·</span><span>Certification</span>
+              <div class="content">
+                <div class="credGrid" role="list">
+                  <div class="credItem" role="listitem">
+                    <div class="credLeft">
+                      <div class="credName">L1 Basic Proficiency in KNIME Analytics Platform</div>
+                      <div class="credMeta"><span>KNIME</span><span>·</span><span>Certification</span></div>
                     </div>
+                    <a href="https://www.credly.com/badges/7a6e2c00-da11-4c68-9994-8fc4df4a082b/linked_in_profile" target="_blank" rel="noreferrer" class="miniPill">Verify</a>
                   </div>
-                  <a href="https://www.credly.com/badges/7a6e2c00-da11-4c68-9994-8fc4df4a082b/linked_in_profile" target="_blank" rel="noreferrer" class="miniPill" title="Add your verification URL">Verify</a>
                 </div>
               </div>
             </div>
@@ -787,19 +836,22 @@ We then analyzed code similarity between the baseline solutions and the students
 
     <footer>
       <div>© <span id="year"></span> Jose Reis</div>
+      <div>GitHub Pages • Single file</div>
     </footer>
   </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Optional: allow only one accordion open at a time (keeps it snappy).
-    // Comment out if you prefer multiple open.
-    const groups = Array.from(document.querySelectorAll(".surface details"));
-    groups.forEach(d => d.addEventListener("toggle", () => {
-      if (!d.open) return;
-      groups.forEach(o => { if (o !== d) o.open = false; });
-    }));
+    // Keep only one accordion open at a time (prevents jumpy long pages).
+    // Scoped to each surface so different sections don't fight each other.
+    document.querySelectorAll(".surface").forEach(surface => {
+      const ds = Array.from(surface.querySelectorAll("details"));
+      ds.forEach(d => d.addEventListener("toggle", () => {
+        if (!d.open) return;
+        ds.forEach(o => { if (o !== d) o.open = false; });
+      }));
+    });
   </script>
 </body>
 </html>
