@@ -3,631 +3,803 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Portfolio: projects, papers, certifications, licenses." />
-  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Jose Reis — projects, paper, certifications." />
+  <title>Jose Reis</title>
 
   <style>
     :root{
-      --bg: #0b0d10;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.88);
-      --muted: rgba(255,255,255,.62);
-      --line: rgba(255,255,255,.12);
-      --accent: #7cf7c9;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --bg:#ffffff;
+      --text:#0f1115;
+      --muted:#5b616a;
+      --line:#e7e9ee;
+      --chip:#f4f6fa;
+      --accent:#2f6fed;
+      --accent2:#17b890;
+      --max: 920px;
       --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    :root[data-theme="light"]{
-      --bg: #f6f7fb;
-      --panel: rgba(0,0,0,.05);
-      --panel2: rgba(0,0,0,.08);
-      --text: rgba(0,0,0,.86);
-      --muted: rgba(0,0,0,.60);
-      --line: rgba(0,0,0,.12);
-      --accent: #0a7d5a;
-      --shadow: 0 18px 50px rgba(0,0,0,.12);
+      --shadow: 0 14px 50px rgba(16,17,20,.07);
+      --shadow2: 0 8px 26px rgba(16,17,20,.08);
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: var(--sans);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--text);
-      background: radial-gradient(900px 600px at 15% 10%, rgba(124,247,201,.14), transparent 55%),
-                  radial-gradient(900px 600px at 85% 30%, rgba(124,195,247,.12), transparent 55%),
-                  radial-gradient(900px 600px at 60% 90%, rgba(247,124,225,.10), transparent 55%),
-                  var(--bg);
-      letter-spacing: .2px;
+      line-height: 1.6;
+      background:
+        radial-gradient(900px 420px at 12% 0%, rgba(47,111,237,.12), transparent 60%),
+        radial-gradient(980px 420px at 92% 12%, rgba(23,184,144,.12), transparent 60%),
+        radial-gradient(1100px 520px at 55% 100%, rgba(47,111,237,.06), transparent 55%),
+        var(--bg);
     }
-    a{ color:inherit; text-decoration:none; }
+
+    a{ color: inherit; text-decoration: none; transition: color .2s var(--ease); }
     a:hover{ text-decoration: underline; text-underline-offset: 4px; }
 
-    .wrap{ max-width: 1080px; margin: 0 auto; padding: 28px 18px 70px; }
-    header{
-      position: sticky;
-      top:0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,0));
-      padding: 18px 0 10px;
-    }
-    :root[data-theme="light"] header{
-      background: linear-gradient(to bottom, rgba(246,247,251,.85), rgba(246,247,251,0));
-    }
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 26px 18px 74px; }
 
-    .topbar{
+    /* Top nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(231,233,238,.75);
+    }
+    .nav .wrap{
+      padding: 12px 18px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 12px;
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap: 12px;
-      min-width: 220px;
+      gap: 10px;
+      min-width: 210px;
     }
     .mark{
-      width: 38px; height: 38px;
-      border-radius: 12px;
-      background:
-        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.85), transparent 70%),
-        radial-gradient(14px 14px at 70% 60%, rgba(124,247,201,.85), transparent 70%),
-        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+      width: 14px; height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:
+        0 0 0 6px rgba(47,111,237,.10),
+        0 0 0 14px rgba(23,184,144,.05);
     }
-    .name{ font-weight: 700; font-size: 14px; line-height:1.1; }
-    .role{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .brand strong{ font-size: 14px; letter-spacing:.2px; }
+    .brand .sub{ display:block; font-size: 12px; color: var(--muted); margin-top: 1px; }
 
-    .actions{
+    .links{
       display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .links a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+    }
+    .links a:hover{
+      background: var(--chip);
+      color: var(--text);
+      text-decoration:none;
+      transform: translateY(-1px);
+    }
+
+    /* Hero */
+    .hero{
+      padding-top: 28px;
+      position: relative;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(32px, 4.4vw, 52px);
+      letter-spacing: -0.9px;
+      line-height: 1.05;
+    }
+    .lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 70ch;
+    }
+
+    .heroCard{
+      margin-top: 18px;
+      border: 1px solid rgba(231,233,238,.9);
+      border-radius: calc(var(--radius) + 4px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.78));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .heroRow{
+      display:flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 14px;
+      border-bottom: 1px solid rgba(231,233,238,.75);
+    }
+    .heroRow:last-child{ border-bottom: 0; }
+    .heroMeta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
       align-items:center;
+    }
+    .pill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(231,233,238,.9);
+      background: rgba(244,246,250,.85);
+      padding: 6px 10px;
+      border-radius: 999px;
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      white-space: nowrap;
+      transition: background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .pill i{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      display:inline-block;
+      background: rgba(47,111,237,.65);
+      box-shadow: 0 0 0 4px rgba(47,111,237,.10);
+    }
+    .cta{
+      display:flex;
       gap: 10px;
       flex-wrap: wrap;
       justify-content:flex-end;
     }
     .btn{
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-size: 12px;
-      line-height: 1;
-      display:flex;
-      gap: 8px;
+      display:inline-flex;
       align-items:center;
-      cursor: pointer;
-      user-select:none;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      box-shadow: 0 8px 22px rgba(0,0,0,.15);
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(231,233,238,.95);
+      background: #fff;
+      font-size: 13px;
+      box-shadow: 0 10px 28px rgba(16,17,20,.06);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
     }
-    .btn:hover{ background: var(--panel2); }
-    .btn:active{ transform: translateY(1px); }
-    .btn kbd{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      border: 1px solid var(--line);
-      padding: 2px 6px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.03);
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+      border-color: rgba(47,111,237,.22);
+      text-decoration:none;
+    }
+    .btn:active{
+      transform: translateY(0);
+    }
+    .btn.primary{
+      border-color: rgba(47,111,237,.25);
+      background: linear-gradient(180deg, rgba(47,111,237,.12), rgba(47,111,237,.06));
     }
 
-    .hero{
-      margin-top: 22px;
-      padding: 26px 18px 10px;
-    }
-    .headline{
-      font-size: clamp(26px, 3vw, 38px);
-      line-height: 1.08;
-      letter-spacing: -0.5px;
+    /* Sections */
+    section{ padding-top: 34px; }
+    .secTitle{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 12px;
       margin: 0 0 10px;
     }
-    .sub{
-      max-width: 70ch;
-      margin: 0 0 18px;
+    h2{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
+      font-weight: 700;
     }
-
-    .chips{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .chip{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-size: 12px;
+    .note{
+      margin: 0;
+      font-size: 13px;
       color: var(--muted);
-      cursor: pointer;
-      transition: background .2s ease, border-color .2s ease;
-    }
-    .chip:hover{ background: var(--panel); }
-    .chip[data-active="true"]{
-      background: rgba(124,247,201,.14);
-      border-color: rgba(124,247,201,.35);
-      color: var(--text);
     }
 
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 14px;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-      header{ position: relative; backdrop-filter:none; }
-    }
-
-    .panel{
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    /* Surface */
+    .surface{
+      border: 1px solid rgba(231,233,238,.9);
       border-radius: var(--radius);
+      background: rgba(255,255,255,.84);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    :root[data-theme="light"] .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
-    }
 
-    .panel-head{
-      padding: 14px 14px 10px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 12px;
-      border-bottom: 1px solid var(--line);
+    /* Feature blocks */
+    .feature{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 14px;
+      align-items: start;
+      border-top: 1px solid rgba(231,233,238,.75);
+      transition: background .2s var(--ease);
     }
-    .panel-title{
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .4px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .search{
-      display:flex; align-items:center; gap: 10px;
-      width: 100%;
-      max-width: 520px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.14);
-      border-radius: 14px;
-      padding: 10px 12px;
-    }
-    :root[data-theme="light"] .search{ background: rgba(255,255,255,.7); }
-    .search input{
-      width: 100%;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 14px;
-    }
-    .search .hint{
-      font-family: var(--mono);
-      color: var(--muted);
-      font-size: 11px;
-      border: 1px solid var(--line);
-      padding: 2px 6px;
-      border-radius: 10px;
-      white-space: nowrap;
-    }
-
-    .list{ padding: 10px; }
-    .item{
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,.03);
-      margin-bottom: 10px;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-    }
-    .item:hover{
-      background: rgba(255,255,255,.05);
-      border-color: rgba(124,247,201,.28);
-      transform: translateY(-1px);
-    }
-    .row{
-      display:flex;
-      gap: 10px;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-    .title{
-      font-weight: 700;
+    .feature:first-child{ border-top: 0; }
+    .feature h3{
+      margin: 0 0 6px;
       font-size: 15px;
-      margin: 0;
-      line-height: 1.25;
+      letter-spacing: -0.2px;
+      font-weight: 600;
     }
-    .meta{
-      margin-top: 6px;
+    .feature p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .feature .links{
+      gap: 8px;
+      justify-content:flex-start;
+    }
+    .tagRow{
+      margin-top: 10px;
       display:flex;
       gap: 8px;
       flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 12px;
     }
-    .pill{
-      border: 1px solid var(--line);
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(231,233,238,.9);
+      background: rgba(244,246,250,.75);
+      padding: 5px 9px;
       border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 11px;
-      color: var(--muted);
-      background: rgba(255,255,255,.02);
-      display:inline-flex;
-      gap: 6px;
-      align-items:center;
     }
-    .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(124,247,201,.75);
-      box-shadow: 0 0 0 4px rgba(124,247,201,.08);
-    }
-    .desc{
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-    .links{
-      margin-top: 10px;
-      display:flex; flex-wrap: wrap; gap: 10px;
-      font-size: 12px;
-      color: var(--text);
-    }
-    .link{
-      border-bottom: 1px solid transparent;
-      opacity: .92;
-    }
-    .link:hover{ opacity: 1; border-bottom-color: rgba(124,247,201,.45); text-decoration:none; }
 
-    .side{
+    /* Accordion with motion */
+    details{
+      border-top: 1px solid rgba(231,233,238,.75);
+      padding: 0;
+      background: transparent;
+    }
+    details:first-child{ border-top: 0; }
+
+    summary{
+      cursor: pointer;
+      list-style: none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
       padding: 14px;
+      font-weight: 600;
+      user-select:none;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+    summary:hover{
+      background: rgba(47,111,237,.04);
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .sumLeft{
       display:flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 4px;
+      min-width: 0;
     }
-    .card{
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(255,255,255,.03);
+    .sumTitle{
+      font-size: 15px;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+      font-weight: 600;
     }
-    .card h3{
-      margin: 0 0 8px;
-      font-size: 13px;
-      letter-spacing: .4px;
-      text-transform: uppercase;
+    .sumMeta{
+      font-size: 12px;
       color: var(--muted);
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items:center;
     }
-    .card p{
-      margin: 0;
+    .miniPill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(231,233,238,.9);
+      background: rgba(244,246,250,.70);
+      padding: 4px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
+    }
+
+    .chev{
+      width: 34px; height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(231,233,238,.95);
+      background: rgba(255,255,255,.9);
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+      transition: transform .3s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .chev svg{ width: 18px; height: 18px; opacity: .7; transition: opacity .2s var(--ease); }
+    details[open] .chev{
+      transform: rotate(180deg);
+      background: rgba(47,111,237,.08);
+      border-color: rgba(47,111,237,.22);
+    }
+    details[open] .chev svg{
+      opacity: 1;
+    }
+
+    /* Animated body using grid rows */
+    .body{
+      display:grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s var(--ease);
+      padding: 0 14px;
+    }
+    details[open] .body{ grid-template-rows: 1fr; }
+    .body > .inner{
+      overflow: hidden;
+      padding-bottom: 14px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.55;
     }
-    .mini{
+
+    .inner .row{
       margin-top: 10px;
       display:flex;
       gap: 10px;
       flex-wrap: wrap;
+      align-items:center;
     }
-    .mini a{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      padding: 8px 10px;
-      border-radius: 999px;
+    .inner a{
+      color: var(--text);
+      border-bottom: 1px solid rgba(47,111,237,.2);
+      text-decoration:none;
+      transition: border-color .2s var(--ease), color .2s var(--ease);
+    }
+    .inner a:hover{ border-bottom-color: var(--accent); color: var(--accent); }
+
+    .credGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .credItem{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      justify-content:space-between;
+      padding: 10px 12px;
+      border: 1px solid rgba(231,233,238,.9);
+      border-radius: 14px;
+      background: rgba(244,246,250,.55);
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .credItem:hover{
+      transform: translateY(-2px);
+      background: rgba(244,246,250,.8);
+      border-color: rgba(47,111,237,.22);
+      box-shadow: 0 4px 12px rgba(47,111,237,.08);
+    }
+    .credLeft{
+      min-width:0;
+    }
+    .credName{
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+    .credMeta{
+      margin-top: 4px;
+      color: var(--muted);
       font-size: 12px;
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Contact */
+    .contact{
+      padding: 14px;
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content:space-between;
+      border-top: 1px solid rgba(231,233,238,.75);
+    }
+    .contact .left{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .contact .right{
+      display:flex; gap: 10px; flex-wrap: wrap;
     }
 
     footer{
-      margin-top: 26px;
+      margin-top: 44px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(231,233,238,.9);
       color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
       display:flex;
-      justify-content: space-between;
+      justify-content:space-between;
       gap: 10px;
       flex-wrap: wrap;
-      padding: 0 6px;
     }
 
-    /* Print */
-    @media print{
-      header{ position: static; background: none !important; }
-      .actions, .chips, .search .hint{ display:none !important; }
-      body{ background: white !important; color: black !important; }
-      .panel, .item, .card{ box-shadow: none !important; }
-      a{ text-decoration: none !important; color: black !important; }
+    /* Responsive tweaks */
+    @media (max-width: 720px){
+      .heroRow{ flex-direction: column; align-items: flex-start; }
+      .cta{ justify-content:flex-start; }
+      .feature{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      .nav .wrap{ padding: 10px 14px; }
+      .wrap{ padding: 22px 14px 60px; }
+      .links a{ padding: 6px 8px; }
+      .chev{ width: 32px; height: 32px; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .btn, .links a, .credItem, .chev, .body, summary, .inner a, a, .pill, .miniPill{ transition: none !important; }
     }
   </style>
 </head>
 
 <body>
-  <header>
+  <div class="nav">
     <div class="wrap">
-      <div class="topbar">
-        <div class="brand">
-          <div class="mark" aria-hidden="true"></div>
-          <div>
-            <div class="name">Your Name</div>
-            <div class="role">AI Student • ML / NLP • Amsterdam</div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a class="btn" href="mailto:you@email.com" title="Email">
-            ✉️ <span>Email</span>
-          </a>
-          <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noreferrer">
-            ⌁ <span>GitHub</span>
-          </a>
-          <button class="btn" id="themeBtn" type="button" title="Toggle theme">
-            ◐ <span>Theme</span> <kbd>T</kbd>
-          </button>
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <div>
+          <strong>Jose Reis</strong>
+          <span class="sub">Data Analysis and AI • VU Amsterdam</span>
         </div>
       </div>
-
-      <section class="hero">
-        <h1 class="headline">
-          Building useful systems —<br/>
-          with a taste for clean evaluation.
-        </h1>
-        <p class="sub">
-          Portfolio of projects, research papers, certifications, and licenses.
-          Minimal by default, detailed on demand.
-        </p>
-
-        <div class="chips" id="filters" aria-label="Filters">
-          <button class="chip" data-filter="all" data-active="true">All</button>
-          <button class="chip" data-filter="project">Projects</button>
-          <button class="chip" data-filter="paper">Papers</button>
-          <button class="chip" data-filter="certificate">Certificates</button>
-          <button class="chip" data-filter="license">Licenses</button>
-        </div>
-      </section>
+      <nav class="links" aria-label="Primary">
+        <a href="#highlights">Highlights</a>
+        <a href="#paper">Papers</a>
+        <a href="#project">Project</a>
+        <a href="#experience">Experience</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-  </header>
+  </div>
 
-  <main class="wrap">
-    <section class="grid">
-      <!-- Main list -->
-      <div class="panel">
-        <div class="panel-head">
-          <div class="panel-title">Selected Work</div>
-          <div class="search" role="search">
-            🔎
-            <input id="q" type="search" placeholder="Search titles, tags, or keywords…" autocomplete="off" />
-            <span class="hint">/</span>
+  <main id="top" class="wrap">
+    <header class="hero">
+      <h1>
+        Jose Maria Zuzarte Reis Claver
+      </h1>
+      <p class="lead">
+        I’m a Portuguese 3rd year Artificial Intelligent at VU Amsterdam, with foundations in machine learning, statistics and data analysis, with experience as a teaching and research assistant, and interested in applied AI and data analysis. I’m highly motivated to experience new challenges and collecting more hands-on experience while facing a new environment.
+      </p>
+
+      <div class="heroCard" id="highlights">
+        <div class="heroRow">
+          <div class="heroMeta">
+            <span class="pill"><i aria-hidden="true"></i> Upcoming: ICSE 2026 (SEET)</span>
+            <span class="pill"><i aria-hidden="true"></i> Stock Management</span>
+            <span class="pill"><i aria-hidden="true"></i> IBM / Microsoft / Meta / KNIME</span>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="https://github.com/josemzreis" target="_blank" rel="noreferrer">GitHub →</a>
+            <a class="btn" href="mailto:j.m.zuzarte.reis.claver@student.vu.nl">Email →</a>
+            <a class="btn" href="#credentials">Credentials ↓</a>
           </div>
         </div>
+        <div class="heroRow">
+          <div class="heroMeta">
+            <span class="miniPill">github.com/josemzreis</span>
+            <span class="miniPill">j.m.zuzarte.reis.claver@student.vu.nl</span>
+          </div>
+          <div class="heroMeta">
+            <span class="miniPill">Scroll for details</span>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <div class="list" id="list" aria-live="polite"></div>
+    <!-- Paper -->
+    <section id="paper">
+      <div class="secTitle">
+        <h2>Paper</h2>
+        <p class="note">Accepted / to be published.</p>
       </div>
 
-      <!-- Sidebar -->
-      <aside class="panel side">
-        <div class="card">
-          <h3>About</h3>
-          <p>
-            A short 3–5 line intro. What you’re aiming for, what you’re good at,
-            and what kind of roles or collaborations you want.
-          </p>
-          <div class="mini">
-            <a href="#" id="downloadCV">Download CV (PDF)</a>
-            <a href="#contact">Contact</a>
+      <div class="surface">
+        <details>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">
+                The Clash of Codes: From Peer-to-Peer Duplication to AI-Generation in Introductory Programming Assignments
+              </div>
+              <div class="sumMeta">
+                <span class="miniPill">ICSE 2026</span>
+                <span class="miniPill">SEET Track</span>
+                <span class="miniPill">Publication pending</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div style="font-weight: 600; margin-bottom: 10px; font-size: 13px; color: var(--text);">Abstract</div>
+              Generative AI tools such as ChatGPT, GitHub Copilot, and Gemini have rapidly influenced programming education by providing instant code generation and problem-solving support. This study investigates the potential impact of these tools on an introductory Python programming course by conducting an observational analysis of two cohorts in 2022 and 2024. In total, we analyzed a corpus of 1,614 submissions across three assignments. To study the possible influence of generative AI tools, we created baseline solutions for each assignment using ChatGPT and Gemini.
+
+We then analyzed code similarity between the baseline solutions and the students’ submissions, as well as syntax errors across both cohorts. For Assignment 2, peer-to-peer duplication decreased by 60.11\% between 2022 and 2024. Among the 2024 submissions, we observe substantial similarity to fixed AI baselines, depending on task complexity. Although this pattern is consistent with the convergence toward AI-generated solutions, we lack direct measures of tool use and make no causal claims. The number of syntax errors did not differ significantly between the two cohorts. These findings suggest a shift in programming education, from direct student copying toward solutions that increasingly resemble AI-generated outputs. This shift emphasizes the need for updated assessments and policies to promote fairness, integrity, and meaningful learning in introductory programming courses.
+              <div class="row">
+                <span class="miniPill">Links</span>
+                <a href="#" target="_blank" rel="noreferrer" title="Add your preprint / camera-ready link">Preprint (soon)</a>
+                <span class="muted">·</span>
+                <a href="#" target="_blank" rel="noreferrer" title="Add DOI when available">DOI (soon)</a>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="secTitle">
+        <h2>Experience</h2>
+      </div>
+
+      <div class="surface">
+        <details open>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">Data Analyst Intern</div>
+              <div class="sumMeta">
+                <span class="miniPill">Logizmic</span>
+                <span class="miniPill">Feb 2026 - Present</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              Working as a Data Analyst Intern at Logizmic, focusing on data analysis and business intelligence projects.
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">Research Assistant</div>
+              <div class="sumMeta">
+                <span class="miniPill">Vrije Universiteit</span>
+                <span class="miniPill">Jan 2025 - Present</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              Research Assistant at Vrije Universiteit, supporting research projects and data analysis work. Contributed to research initiatives with a focus on AI and programming education.
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">Teaching Assistant</div>
+              <div class="sumMeta">
+                <span class="miniPill">Vrije Universiteit</span>
+                <span class="miniPill">Sep 2024 - Present</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              Teaching Assistant for Introduction to Python Programming, Applied Programming, and Human-Computer Interaction.
+              <div class="row">
+                <span class="miniPill">Responsibilities</span>
+              </div>
+              <ul style="margin: 10px 0 0 0; padding-left: 20px; color: var(--muted); font-size: 13px;">
+                <li style="margin-bottom: 6px;">Led weekly/bi-weekly lab sessions and tutorials</li>
+                <li style="margin-bottom: 6px;">Mentored student teams on projects and design decisions while providing feedback</li>
+                <li style="margin-bottom: 6px;">Graded assignments, projects, reports, and exams and conducted individual coding interviews</li>
+                <li>Contributed to course improvement through staff meetings and feedback discussions</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section id="project">
+      <div class="secTitle">
+        <h2>Personal Projects</h2>
+      </div>
+
+      <div class="surface">
+        <div class="feature">
+          <div>
+            <h3>Stock Management</h3>
+            <p>
+              Personal project to simulate daily sales, manage inventory, and optimize orders in a supermarket setting. Includes a simple order policy, KPIs (service level, stockouts, costs), and later demand forecasting and an optional Streamlit app.
+            </p>
+            <div class="tagRow" aria-label="Tags">
+
+            </div>
+          </div>
+          <div class="cta" style="justify-content:flex-start">
+            <a class="btn primary" href="https://github.com/josemzreis/stock_management" target="_blank" rel="noreferrer">Repo →</a>
+           
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
-          <h3>Focus</h3>
-          <p>
-            • ML engineering<br/>
-            • NLP / text mining<br/>
-            • Reproducible evaluation<br/>
-            • Practical tooling
-          </p>
-        </div>
+    <!-- Credentials -->
+    <section id="credentials">
+      <div class="secTitle">
+        <h2>Credentials</h2>
 
-        <div class="card" id="contact">
-          <h3>Links</h3>
-          <div class="mini">
-            <a href="https://www.linkedin.com/in/yourhandle" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a>
-            <a href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a>
-            <a href="https://twitter.com/" target="_blank" rel="noreferrer">X</a>
+      </div>
+
+      <div class="surface">
+        <details open>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">Coursera</div>
+              <div class="sumMeta">
+                <span class="miniPill">IBM</span>
+                <span class="miniPill">Microsoft</span>
+                <span class="miniPill">Meta</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="credGrid" role="list">
+                <div class="credItem" role="listitem">
+                  <div class="credLeft">
+                    <div class="credName">IBM Exploratory Data Analysis for Machine Learning</div>
+                    <div class="credMeta">
+                      <span>Coursera</span><span>·</span><span>IBM</span>
+                    </div>
+                  </div>
+                  <a href="https://coursera.org/share/a82525ac6319fe767a78827e372b094d" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
+                </div>
+
+                <div class="credItem" role="listitem">
+                  <div class="credLeft">
+                    <div class="credName">Microsoft Introduction to Microsoft Azure Cloud Services</div>
+                    <div class="credMeta">
+                      <span>Coursera</span><span>·</span><span>Microsoft</span>
+                    </div>
+                  </div>
+                  <a href="https://coursera.org/share/8e224e0fe602f6ee35213ec8635e31e2" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
+                </div>
+
+                <div class="credItem" role="listitem">
+                  <div class="credLeft">
+                    <div class="credName">IBM Java Programming for Beginners</div>
+                    <div class="credMeta">
+                      <span>Coursera</span><span>·</span><span>IBM</span>
+                    </div>
+                  </div>
+                  <a href="https://coursera.org/share/a253cd8afbe16f1e67dda695ada45475" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
+                </div>
+
+                <div class="credItem" role="listitem">
+                  <div class="credLeft">
+                    <div class="credName">Meta Introduction to Front-End Development</div>
+                    <div class="credMeta">
+                      <span>Coursera</span><span>·</span><span>Meta</span>
+                    </div>
+                  </div>
+                  <a href="https://coursera.org/share/259f3a6719e09fc0608a646c9d7b5b79" target="_blank" rel="noreferrer" class="miniPill" title="Add your Coursera verification URL">Verify</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sumLeft">
+              <div class="sumTitle">KNIME</div>
+              <div class="sumMeta">
+                <span class="miniPill">Analytics Platform</span>
+                <span class="miniPill">L1</span>
+              </div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="credGrid" role="list">
+                <div class="credItem" role="listitem">
+                  <div class="credLeft">
+                    <div class="credName">L1 Basic Proficiency in KNIME Analytics Platform</div>
+                    <div class="credMeta">
+                      <span>KNIME</span><span>·</span><span>Certification</span>
+                    </div>
+                  </div>
+                  <a href="https://www.credly.com/badges/7a6e2c00-da11-4c68-9994-8fc4df4a082b/linked_in_profile" target="_blank" rel="noreferrer" class="miniPill" title="Add your verification URL">Verify</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div class="contact" id="contact">
+          <div class="left">
+            Email: <a href="mailto:j.m.zuzarte.reis.claver@student.vu.nl">j.m.zuzarte.reis.claver@student.vu.nl</a><br/>
+            GitHub: <a href="https://github.com/josemzreis" target="_blank" rel="noreferrer">@josemzreis</a>
+          </div>
+          <div class="right">
+            <a class="btn primary" href="mailto:j.m.zuzarte.reis.claver@student.vu.nl">Email →</a>
+            <a class="btn" href="https://github.com/josemzreis" target="_blank" rel="noreferrer">GitHub →</a>
           </div>
         </div>
-      </aside>
+      </div>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> Your Name</div>
-      <div>Built with plain HTML/CSS/JS • Hosted on GitHub Pages</div>
+      <div>© <span id="year"></span> Jose Reis</div>
     </footer>
   </main>
 
   <script>
-    // ------- Data: edit this list -------
-    const items = [
-      {
-        type: "project",
-        title: "Sentiment Analysis Classifier",
-        when: "2025",
-        tags: ["NLP", "LogReg", "SVM", "Evaluation"],
-        where: "Course project",
-        description: "Trained and compared classical ML baselines for sentiment classification; focused on robust evaluation and clear reporting.",
-        links: [
-          { label: "Repo", href: "https://github.com/yourusername/your-repo" },
-          { label: "Write-up", href: "#" }
-        ]
-      },
-      {
-        type: "paper",
-        title: "Generative AI & Programming Assignment Similarity (2022 vs 2024)",
-        when: "2025",
-        tags: ["GenAI", "Plagiarism", "Statistics", "JPlag"],
-        where: "Research report",
-        description: "Analyzed similarity distributions and performance metrics; used statistical testing and careful methodology to compare cohorts.",
-        links: [
-          { label: "PDF", href: "#" },
-          { label: "Data", href: "#" }
-        ]
-      },
-      {
-        type: "certificate",
-        title: "Machine Learning Specialization",
-        when: "2024",
-        tags: ["ML", "Supervised", "Unsupervised"],
-        where: "Coursera",
-        description: "Covered core supervised and unsupervised methods with practical assignments.",
-        links: [
-          { label: "Credential", href: "#" }
-        ]
-      },
-      {
-        type: "license",
-        title: "AWS Certified Cloud Practitioner",
-        when: "2024",
-        tags: ["Cloud", "AWS"],
-        where: "Amazon",
-        description: "Fundamentals of cloud concepts, security, pricing, and AWS services.",
-        links: [
-          { label: "Verify", href: "#" }
-        ]
-      }
-    ];
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ------- Rendering -------
-    const listEl = document.getElementById("list");
-    const qEl = document.getElementById("q");
-    const filtersEl = document.getElementById("filters");
-    const yearEl = document.getElementById("year");
-    const themeBtn = document.getElementById("themeBtn");
-
-    let activeFilter = "all";
-
-    function escapeHtml(str){
-      return String(str).replace(/[&<>"']/g, s => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[s]));
-    }
-
-    function matches(item, q){
-      if(!q) return true;
-      const hay = [
-        item.type, item.title, item.when, item.where, item.description,
-        ...(item.tags || []).join(" ")
-      ].join(" ").toLowerCase();
-      return hay.includes(q.toLowerCase());
-    }
-
-    function filterOk(item){
-      return activeFilter === "all" || item.type === activeFilter;
-    }
-
-    function iconFor(type){
-      return ({ project:"◆", paper:"✦", certificate:"✓", license:"⟡" }[type] || "•");
-    }
-
-    function render(){
-      const q = qEl.value.trim();
-      const visible = items
-        .filter(filterOk)
-        .filter(it => matches(it, q));
-
-      if(visible.length === 0){
-        listEl.innerHTML = `<div class="item">
-          <p class="title">No matches.</p>
-          <p class="desc">Try a different keyword or switch filters.</p>
-        </div>`;
-        return;
-      }
-
-      listEl.innerHTML = visible.map(it => `
-        <article class="item" data-type="${escapeHtml(it.type)}">
-          <div class="row">
-            <div>
-              <h2 class="title">
-                <span class="pill"><span class="dot"></span>${escapeHtml(it.type.toUpperCase())}</span>
-                &nbsp;${escapeHtml(it.title)}
-              </h2>
-              <div class="meta">
-                <span class="pill">${escapeHtml(iconFor(it.type))} ${escapeHtml(it.where || "")}</span>
-                <span class="pill">⏱ ${escapeHtml(it.when || "")}</span>
-                ${(it.tags || []).slice(0,6).map(t => `<span class="pill">#${escapeHtml(t)}</span>`).join("")}
-              </div>
-            </div>
-          </div>
-
-          ${it.description ? `<p class="desc">${escapeHtml(it.description)}</p>` : ""}
-
-          ${(it.links && it.links.length) ? `
-            <div class="links">
-              ${it.links.map(l => `<a class="link" href="${escapeHtml(l.href)}" target="_blank" rel="noreferrer">→ ${escapeHtml(l.label)}</a>`).join("")}
-            </div>
-          ` : ""}
-        </article>
-      `).join("");
-    }
-
-    // ------- Filter buttons -------
-    filtersEl.addEventListener("click", (e) => {
-      const btn = e.target.closest("button[data-filter]");
-      if(!btn) return;
-      activeFilter = btn.dataset.filter;
-
-      [...filtersEl.querySelectorAll(".chip")].forEach(b => b.dataset.active = "false");
-      btn.dataset.active = "true";
-      render();
-    });
-
-    // ------- Search -------
-    qEl.addEventListener("input", render);
-    window.addEventListener("keydown", (e) => {
-      if(e.key === "/" && document.activeElement !== qEl){
-        e.preventDefault();
-        qEl.focus();
-      }
-      if(e.key.toLowerCase() === "t"){
-        toggleTheme();
-      }
-    });
-
-    // ------- Theme -------
-    function applyTheme(theme){
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-    }
-    function toggleTheme(){
-      const cur = document.documentElement.getAttribute("data-theme") || "dark";
-      applyTheme(cur === "dark" ? "light" : "dark");
-    }
-    themeBtn.addEventListener("click", toggleTheme);
-
-    // ------- “Download CV” demo -------
-    document.getElementById("downloadCV").addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("Replace this with a real CV link (e.g., /assets/CV.pdf).");
-    });
-
-    // init
-    yearEl.textContent = new Date().getFullYear();
-    const saved = localStorage.getItem("theme");
-    if(saved) applyTheme(saved);
-    render();
+    // Optional: allow only one accordion open at a time (keeps it snappy).
+    // Comment out if you prefer multiple open.
+    const groups = Array.from(document.querySelectorAll(".surface details"));
+    groups.forEach(d => d.addEventListener("toggle", () => {
+      if (!d.open) return;
+      groups.forEach(o => { if (o !== d) o.open = false; });
+    }));
   </script>
 </body>
 </html>
